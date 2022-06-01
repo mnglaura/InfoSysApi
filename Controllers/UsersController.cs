@@ -24,9 +24,21 @@ namespace infosysapi.Controllers
 
         [Authorize(Roles = Roles.Admin)]
         [HttpGet]
-        public List<User> Get()
+        public List<User> GetAll()
         {
             return _context.users.ToList(); 
+        }
+
+        [Authorize(Roles = Roles.Admin)]
+        [HttpGet("{id}")] 
+        public ActionResult<User> GetUser(string id) 
+        {    
+            var user = _context.users.Find(id);     
+            if (user == null)    
+            {         
+                return NotFound();     
+            }     
+            return user;
         }
 
         [Authorize(Roles = Roles.Admin)]

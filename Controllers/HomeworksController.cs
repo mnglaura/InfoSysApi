@@ -53,7 +53,7 @@ namespace infosysapi.Controllers
             return items;
         }
 
-        [Authorize(Roles = Roles.Admin + "," + Roles.Student)]
+        [Authorize(Roles = Roles.Admin + "," + Roles.Professor)]
         [HttpGet("courses/{coursId}")] 
         public ActionResult<IEnumerable<Homework>> GetHomeworksForCourse(string coursId) 
         {    
