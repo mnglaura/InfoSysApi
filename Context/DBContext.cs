@@ -1,6 +1,7 @@
+using infosysapi.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace infosysapi.Models
+namespace infosysapi.Context
 {
     public class DBContext : DbContext
     {

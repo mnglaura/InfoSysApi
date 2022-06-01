@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using infosysapi.Dtos;
-using infosysapi.Extensions;
+using infosysapi.Context;
 using infosysapi.Models;
 using Microsoft.AspNetCore.Mvc;
 
