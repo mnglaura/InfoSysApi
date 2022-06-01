@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "XzRxAlSUd4vgCKJMl74EX1Maq+/sfTswcEZtNZMeFtWhWrCVXqE686TA6tcK3AK1asHRRUQC796qgP3AsMN4EQ==",
+  "dgSpecHash": "YfQCFTXpDJjvTDHeSPENgDKupDIlwvV7KzxP0nkkg+Iz5bb20XRdE5WStzC2XvZEuQ5EYUh+Qsfmk/9ImzPagA==",
   "success": true,
   "projectFilePath": "C:\\Users\\laura.mangu\\Desktop\\licenta\\infosysapi\\infosysapi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\laura.mangu\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\laura.mangu\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\5.0.0\\microsoft.aspnetcore.authentication.jwtbearer.5.0.0.nupkg.sha512",
     "C:\\Users\\laura.mangu\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\laura.mangu\\.nuget\\packages\\microsoft.entityframeworkcore\\5.0.0\\microsoft.entityframeworkcore.5.0.0.nupkg.sha512",
     "C:\\Users\\laura.mangu\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\5.0.0\\microsoft.entityframeworkcore.abstractions.5.0.0.nupkg.sha512",
@@ -25,6 +26,8 @@
     "C:\\Users\\laura.mangu\\.nuget\\packages\\microsoft.identitymodel.abstractions\\6.18.0\\microsoft.identitymodel.abstractions.6.18.0.nupkg.sha512",
     "C:\\Users\\laura.mangu\\.nuget\\packages\\microsoft.identitymodel.jsonwebtokens\\6.18.0\\microsoft.identitymodel.jsonwebtokens.6.18.0.nupkg.sha512",
     "C:\\Users\\laura.mangu\\.nuget\\packages\\microsoft.identitymodel.logging\\6.18.0\\microsoft.identitymodel.logging.6.18.0.nupkg.sha512",
+    "C:\\Users\\laura.mangu\\.nuget\\packages\\microsoft.identitymodel.protocols\\6.7.1\\microsoft.identitymodel.protocols.6.7.1.nupkg.sha512",
+    "C:\\Users\\laura.mangu\\.nuget\\packages\\microsoft.identitymodel.protocols.openidconnect\\6.7.1\\microsoft.identitymodel.protocols.openidconnect.6.7.1.nupkg.sha512",
     "C:\\Users\\laura.mangu\\.nuget\\packages\\microsoft.identitymodel.tokens\\6.18.0\\microsoft.identitymodel.tokens.6.18.0.nupkg.sha512",
     "C:\\Users\\laura.mangu\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\laura.mangu\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
