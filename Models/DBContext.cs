@@ -13,6 +13,14 @@ namespace infosysapi.Models
 
         public DbSet<Professor> professors { get; set; } 
 
-        public DbSet<Curs> curs { get; set; } 
+        public DbSet<Cours> courses { get; set; } 
+
+        public DbSet<StudEnrollment> studenrollments { get; set; } 
+
+        public DbSet<ProfTeaching> profteachings { get; set; }
+
+        public DbSet<Grade> grades { get; set; }
+
+        public DbSet<Homework> homeworks { get; set; }
     }
 }
