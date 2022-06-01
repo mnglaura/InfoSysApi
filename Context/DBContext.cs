@@ -23,5 +23,7 @@ namespace infosysapi.Context
         public DbSet<Grade> grades { get; set; }
 
         public DbSet<Homework> homeworks { get; set; }
+
+        public DbSet<User> users { get; set; }
     }
 }

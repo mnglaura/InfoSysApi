@@ -1,7 +1,9 @@
+using infosysapi.Models;
+
 namespace infosysapi.Auth
 {
        public interface IJWTManagerContext
     {
-        Tokens Authenticate(Users users); 
+        Tokens Authenticate(User user); 
     }
 }

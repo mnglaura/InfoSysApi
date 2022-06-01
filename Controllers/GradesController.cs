@@ -1,12 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using infosysapi.Auth;
 using infosysapi.Context;
 using infosysapi.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace infosysapi.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class GradesController: ControllerBase
@@ -17,12 +20,14 @@ namespace infosysapi.Controllers
             _context = context;
         }
 
+        [Authorize(Roles = Roles.Admin + "," + Roles.Professor)]
         [HttpGet] 
         public ActionResult<List<Grade>> GetAll() 
         {     
             return _context.grades.ToList(); 
         }
 
+        [Authorize(Roles = Roles.Admin + "," + Roles.Professor)]
         [HttpGet("{id}")] 
         public ActionResult<Grade> GetById(string id) 
         {    
@@ -34,6 +39,7 @@ namespace infosysapi.Controllers
             return item;
         }
 
+        [Authorize(Roles = Roles.Admin + "," + Roles.Professor)]
         [HttpGet("students/{studid}")] 
         public ActionResult<IEnumerable<Grade>> GetGrades(string studid) 
         {    
@@ -45,6 +51,7 @@ namespace infosysapi.Controllers
             return items;
         }
 
+        [Authorize(Roles = Roles.Admin + "," + Roles.Professor + "," + Roles.Student)]
         [HttpGet("courses/{coursId}")] 
         public ActionResult<IEnumerable<Grade>> GetGradesForCourse(string coursId) 
         {    
@@ -56,6 +63,7 @@ namespace infosysapi.Controllers
             return items;
         }
 
+        [Authorize(Roles = Roles.Admin)]
         [HttpPost]
         public ActionResult<Grade> Create(Grade grade) 
         {    
@@ -72,6 +80,7 @@ namespace infosysapi.Controllers
             return CreatedAtAction(nameof(GetById), new {id = newGrade.id}, newGrade);
         }
 
+        [Authorize(Roles = Roles.Admin + "," + Roles.Professor)]
         [HttpPut("{id}")]
         public ActionResult Update(string id, Grade grade)
         {
@@ -94,6 +103,7 @@ namespace infosysapi.Controllers
             return NoContent();
         }
 
+        [Authorize(Roles = Roles.Admin)]
         [HttpDelete("{id}")]
         public ActionResult Delete(string id)
         {

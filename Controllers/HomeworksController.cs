@@ -1,14 +1,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using infosysapi.Auth;
 using infosysapi.Context;
 using infosysapi.Dtos;
 using infosysapi.Extensions;
 using infosysapi.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace infosysapi.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class HomeworksController: ControllerBase
@@ -19,12 +22,14 @@ namespace infosysapi.Controllers
             _context = context;
         }
 
+        [Authorize(Roles = Roles.Admin + "," + Roles.Student)]
         [HttpGet] 
         public ActionResult<List<Homework>> GetAll() 
         {     
             return _context.homeworks.ToList(); 
         }
 
+        [Authorize(Roles = Roles.Admin + "," + Roles.Student)]
         [HttpGet("{id}")] 
         public ActionResult<Homework> GetById(string id) 
         {    
@@ -36,8 +41,9 @@ namespace infosysapi.Controllers
             return item;
         }
 
+        [Authorize(Roles = Roles.Admin + "," + Roles.Student)]
         [HttpGet("students/{studid}")] 
-        public ActionResult<IEnumerable<Homework>> GetGrades(string studid) 
+        public ActionResult<IEnumerable<Homework>> GetHomeworksForStudent(string studid) 
         {    
             var items = _context.homeworks.Where(enrol => enrol.studentid.Equals(studid)).ToList();     
             if (items == null)    
@@ -47,8 +53,9 @@ namespace infosysapi.Controllers
             return items;
         }
 
+        [Authorize(Roles = Roles.Admin + "," + Roles.Student)]
         [HttpGet("courses/{coursId}")] 
-        public ActionResult<IEnumerable<Homework>> GetGradesForCourse(string coursId) 
+        public ActionResult<IEnumerable<Homework>> GetHomeworksForCourse(string coursId) 
         {    
             var items = _context.homeworks.Where(enrol => enrol.courseid.Equals(coursId)).ToList();     
             if (items == null)    
@@ -58,6 +65,7 @@ namespace infosysapi.Controllers
             return items;
         }
 
+        [Authorize(Roles = Roles.Admin + "," + Roles.Student)]
         [HttpGet("status")] 
         public ActionResult<IEnumerable<Homework>> GetByStatus(string status) 
         {    
@@ -69,6 +77,7 @@ namespace infosysapi.Controllers
             return items;
         }
 
+        [Authorize(Roles = Roles.Admin + "," + Roles.Student)]
         [HttpPost]
         public ActionResult<Homework> Create(Homework hmk) 
         {    
@@ -87,6 +96,7 @@ namespace infosysapi.Controllers
             return CreatedAtAction(nameof(GetById), new {id = newGrade.id}, newGrade);
         }
 
+        [Authorize(Roles = Roles.Admin + "," + Roles.Student)]
         [HttpPut("{id}")]
         public ActionResult Update(string id, Homework hmk)
         {
@@ -109,6 +119,7 @@ namespace infosysapi.Controllers
             return NoContent();
         }
 
+        [Authorize(Roles = Roles.Admin + "," + Roles.Student)]
         [HttpDelete("{id}")]
         public ActionResult Delete(string id)
         {

@@ -1,14 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using infosysapi.Auth;
 using infosysapi.Context;
-using infosysapi.Dtos;
-using infosysapi.Extensions;
 using infosysapi.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace infosysapi.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class TeachingsController: ControllerBase
@@ -19,12 +20,14 @@ namespace infosysapi.Controllers
             _context = context;
         }
 
+        [Authorize(Roles = Roles.Admin + "," + Roles.Professor)]
         [HttpGet] 
         public ActionResult<List<ProfTeaching>> GetAll() 
         {     
             return _context.profteachings.ToList(); 
         }
 
+        [Authorize(Roles = Roles.Admin + "," + Roles.Professor)]
         [HttpGet("{id}")] 
         public ActionResult<ProfTeaching> GetById(string id) 
         {    
@@ -36,6 +39,7 @@ namespace infosysapi.Controllers
             return item;
         }
 
+        [Authorize(Roles = Roles.Admin + "," + Roles.Professor)]
         [HttpGet("professors/{profid}")] 
         public ActionResult<IEnumerable<ProfTeaching>> GetCoursesForProfessor(string profid) 
         {    
@@ -47,6 +51,7 @@ namespace infosysapi.Controllers
             return items;
         }
 
+        [Authorize(Roles = Roles.Admin + "," + Roles.Professor)]
         [HttpGet("courses/{coursId}")] 
         public ActionResult<IEnumerable<ProfTeaching>> GetProfessorsTeachingCourse(string coursId) 
         {    
@@ -58,6 +63,7 @@ namespace infosysapi.Controllers
             return items;
         }
 
+        [Authorize(Roles = Roles.Admin + "," + Roles.Professor)]
         [HttpPost]
         public ActionResult<ProfTeaching> Create(ProfTeaching tch) 
         {    
@@ -74,6 +80,7 @@ namespace infosysapi.Controllers
             return CreatedAtAction(nameof(GetById), new {id = newtch.id}, newtch);
         }
 
+        [Authorize(Roles = Roles.Admin + "," + Roles.Professor)]
         [HttpPut("{id}")]
         public ActionResult Update(string id, ProfTeaching tch)
         {
@@ -96,6 +103,7 @@ namespace infosysapi.Controllers
             return NoContent();
         }
 
+        [Authorize(Roles = Roles.Admin + "," + Roles.Professor)]
         [HttpDelete("{id}")]
         public ActionResult Delete(string id)
         {

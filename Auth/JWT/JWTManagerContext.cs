@@ -4,6 +4,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using infosysapi.Context;
+using infosysapi.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
@@ -11,40 +13,34 @@ namespace infosysapi.Auth
 {
     public class JWTManagerContext : IJWTManagerContext
     {
-        Dictionary<string, string> UsersRecords = new Dictionary<string, string>
-        {
-            { "user1","password1"},
-            { "user2","password2"},
-            { "user3","password3"},
-        };
-
+        // private List<Users> _users = new List<Users>
+        // { 
+        //     new Users { id = "jsh",  username = "admin", password = "admin", role = Roles.Admin },
+        //     new Users { id = "asd",   username = "user", password = "user", role = Roles.Student } 
+        // };
         private readonly IConfiguration iconfiguration;
         public JWTManagerContext(IConfiguration iconfiguration)
         {
             this.iconfiguration = iconfiguration;
         }
-        
-        public Tokens Authenticate(Users users)
-        {
-            if (!UsersRecords.Any(x => x.Key == users.username && x.Value == users.password)) 
-            {
-			    return null;
-		    }
 
-            // else generate JSON Web Token
+        public Tokens Authenticate(User user)
+        {
             var tokenHandler = new JwtSecurityTokenHandler();
             var tokenKey = Encoding.UTF8.GetBytes(iconfiguration["JWT:Key"]);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, users.username)                    
+                    new Claim(ClaimTypes.Name, user.username),
+                    new Claim(ClaimTypes.Role, user.role)                    
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(10),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey),SecurityAlgorithms.HmacSha256Signature)
             };
             
             var token = tokenHandler.CreateToken(tokenDescriptor);
+            user.token = tokenHandler.WriteToken(token);
             return new Tokens { token = tokenHandler.WriteToken(token) };
         }
     }

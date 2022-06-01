@@ -1,12 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using infosysapi.Auth;
 using infosysapi.Context;
 using infosysapi.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace infosysapi.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CoursesController: ControllerBase
@@ -17,12 +20,14 @@ namespace infosysapi.Controllers
             _context = context;
         }
 
+        [Authorize(Roles = Roles.Admin + "," + Roles.Professor)]
         [HttpGet] 
         public ActionResult<List<Cours>> GetAll() 
         {     
             return _context.courses.ToList(); 
         }
 
+        [Authorize(Roles = Roles.Admin + "," + Roles.Professor)]
         [HttpGet("{id}")] 
         public ActionResult<Cours> GetById(string id) 
         {    
@@ -34,6 +39,7 @@ namespace infosysapi.Controllers
             return item;
         }
 
+        [Authorize(Roles = Roles.Admin + "," + Roles.Professor)]
         [HttpPost]
         public ActionResult<Cours> Create(Cours cours) 
         {    
@@ -50,6 +56,7 @@ namespace infosysapi.Controllers
             return CreatedAtAction(nameof(GetById), new {id = newCours.id}, newCours);
         }
 
+        [Authorize(Roles = Roles.Admin + "," + Roles.Professor)]
         [HttpPut("{id}")]
         public ActionResult Update(string id, Cours cours)
         {
@@ -72,6 +79,7 @@ namespace infosysapi.Controllers
             return NoContent();
         }
 
+        [Authorize(Roles = Roles.Admin + "," + Roles.Professor)]
         [HttpDelete("{id}")]
         public ActionResult Delete(string id)
         {

@@ -1,14 +1,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using infosysapi.Auth;
 using infosysapi.Context;
 using infosysapi.Dtos;
 using infosysapi.Extensions;
 using infosysapi.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace infosysapi.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class StudentsController: ControllerBase
@@ -19,12 +22,14 @@ namespace infosysapi.Controllers
             _context = context;
         }
 
+        [Authorize(Roles = Roles.Admin)]
         [HttpGet] 
         public ActionResult<List<Student>> GetAll() 
         {     
             return _context.students.ToList(); 
         }
 
+        [Authorize(Roles = Roles.Admin)]
         [HttpGet("{id}")] 
         public ActionResult<StudentDto> GetStudent(string id) 
         {    
@@ -36,6 +41,7 @@ namespace infosysapi.Controllers
             return item.AsDto();
         }
 
+        [Authorize(Roles = Roles.Admin)]
         [HttpPost]
         public ActionResult<StudentDto> CreateStudent(StudentDto student) 
         {    
@@ -53,6 +59,7 @@ namespace infosysapi.Controllers
             return CreatedAtAction(nameof(GetStudent), new {id = stud.id}, stud.AsDto());
         }
 
+        [Authorize(Roles = Roles.Admin)]
         [HttpPut("{id}")]
         public ActionResult UpdateStudent(string id, StudentDto student)
         {
@@ -68,6 +75,7 @@ namespace infosysapi.Controllers
             return NoContent();
         }
 
+        [Authorize(Roles = Roles.Admin)]
         [HttpDelete("{id}")]
         public ActionResult Delete(string id)
         {
