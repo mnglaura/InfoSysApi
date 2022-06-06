@@ -24,7 +24,8 @@ namespace infosysapi.Controllers
         [HttpGet] 
         public ActionResult<List<Cours>> GetAll() 
         {     
-            return _context.courses.ToList(); 
+            var courses = _context.courses.ToList(); 
+            return Ok(courses);
         }
 
         [Authorize(Roles = Roles.Admin + "," + Roles.Professor)]

@@ -13,11 +13,6 @@ namespace infosysapi.Auth
 {
     public class JWTManagerContext : IJWTManagerContext
     {
-        // private List<Users> _users = new List<Users>
-        // { 
-        //     new Users { id = "jsh",  username = "admin", password = "admin", role = Roles.Admin },
-        //     new Users { id = "asd",   username = "user", password = "user", role = Roles.Student } 
-        // };
         private readonly IConfiguration iconfiguration;
         public JWTManagerContext(IConfiguration iconfiguration)
         {
